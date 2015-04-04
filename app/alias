@@ -1,0 +1,2 @@
+alias sf='php app/console'
+alias sfcc='sf cache:clear'
