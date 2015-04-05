@@ -71,3 +71,11 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+digital_dj_pool:
+    login: %ddp_login%
+    password: %ddp_password%
+    root_path: %root_path%
+    stream:
+        type: local
+        route: cpyree_digital_dj_pool_stream
