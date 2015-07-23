@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-lg-7 left-pane">
+        <input class="filter" ng-model="query" placeholder="Filter">
+        <table class="table table-striped">
+            <tr ng-repeat="dir in dirs | filter:query" >
+                <td ng-click="detailAction(dir);">
+                    <input name="{{ pathForm.vars.name }}[path][{{ '{{$index + 1}}' }}][realPathName]" id="" type="hidden"  value="{{  '{{ dir.id}}' }}" />
+                    <label for="{{  '{{ dir.id}}' }}">{{  '{{ dir.fullName | limitTo : 100}}' }}</label>
+                </td>
+                <td>
+                    <select name="{{ pathForm.vars.name }}[path][{{ '{{$index + 1}}' }}][dest]">
+                        <option value="">choose destination</option>
+                        {% for cat in listOpts %}
+                            <option value="{{ cat }}">{{ cat|lower|capitalize }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-lg-5 right-pane">
+        <div class="song-list">
+            <table class="table table-striped">
+            <tr>
+                <td colspan="2">{{  '{{ curDir }}' }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><img src="/bundles/cpyreesaparmanager/images/{{  '{{ cover }}' }}"/></td>
+            </tr>
+            <tr ng-repeat="file in files">
+                <td>
+                    {{  '{{ file.track_number}} {{ file.artist}} - {{ file.title}}' }}
+                </td>
+                <td>
+                    <audio controls  preload="none"><source  src="{{  '{{ getStreamUrl(file.id)}}' }}" type="audio/mpeg"></audio>
+                </td>
+            </tr>
+            </table>
+        </div>
+    </div>
+</div>

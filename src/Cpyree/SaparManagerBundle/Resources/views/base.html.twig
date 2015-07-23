@@ -1,0 +1,29 @@
+{% set rigthContentClass="strech" %}
+{% extends "CpyreeAdminLTEBundle::base.html.twig" %}
+{% block body_class %}skin-black{% endblock %}
+    {% block stylesheets %}
+        {{ parent() }}
+        {% stylesheets filter='cssrewrite' output='css/compiled.css'
+        "../src/Cpyree/SaparManagerBundle/Resources/public/css/AdminLTE_override.css"
+        %}
+        <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+        {% endstylesheets %}
+    {% endblock %}
+{% block left_side %}
+    <!-- no left_side -->
+{% endblock %}
+{% block content_header %}<!-- no content_header -->{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {{ parent() }}
+    {% javascripts
+    'assets_deps/angular/angular.min.js'
+    "assets_deps/angular-route/angular-route.min.js"
+    '@CpyreeDigitalDjPoolBundle/Resources/public/js/*'
+    '@CpyreeSaparManagerBundle/Resources/public/js/controllers.js'
+    '@CpyreeSaparManagerBundle/Resources/public/js/app.js'
+    %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+{% endblock %}

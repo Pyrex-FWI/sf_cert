@@ -1,0 +1,8 @@
+<div class="global_action">
+    {#{ form_widget(form.approve) }}
+    {{ form_widget(form.neutral) }}
+    {{ form_widget(form.disapprove) }#}
+    <button type="submit" id="{{ form.vars.name }}_approve" name="{{ form.vars.name }}[approve]" value="approve" class="btn btn-primary">Approve</button>
+    <button type="submit" id="{{ form.vars.name }}_neutral" name="{{ form.vars.name }}[neutral]" value="neutral"  class="btn btn-primary">Neutral</button>
+    <button type="submit" id="{{ form.vars.name }}_disapprove" name="{{ form.vars.name }}[disapprove]" value="disapprove"  class="btn btn-primary">Disapprove</button>
+</div>

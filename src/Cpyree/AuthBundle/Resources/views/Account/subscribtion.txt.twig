@@ -1,0 +1,2 @@
+Bonjour {{ user.username }},
+Merci de confirmer votre inscription en cliquant sur le lien suivant: {{ app.request.schemeAndHttpHost }}{{ path('cpyree_auth_confirm_subscribe', {'token_hash': user.activationToken}) }}

@@ -1,0 +1,93 @@
+{% set _controller = app.request.get('_controller')|split('\\')|last|split('::')|first|replace({'Controller':''}) %}
+{% set _action = app.request.get('_controller')|split('\\')|last|split('::')|last|replace({'Action':''}) %}
+{% if pageTitle is not defined %}{% set pageTitle = 'AdminLTE | Dashboard' %}{% endif %}
+{% if appTitle is not defined %}{% set appTitle = 'AdminLTE | Dashboard' %}{% endif %}
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{%  block pageTitle %}{{ pageTitle }}{% endblock %}</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    {% block stylesheets %}
+    {% stylesheets filter='cssrewrite' output='css/compiled.css'
+        "assets_deps/fontawesome/css/font-awesome.min.css"
+        "assets_deps/bootstrap/dist/css/bootstrap.min.css"
+        "assets_deps/ionicons/css/ionicons.min.css"
+        "../src/Cpyree/AdminLTEBundle/Resources/public/css/AdminLTE.css"
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+    {% endstylesheets %}
+    {% endblock %}
+    {%  block top_js %}
+    {% javascripts
+    "assets_deps/jquery/dist/jquery.min.js"
+    %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+    {% endblock %}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="{% block body_class %}skin-blue{% endblock %}">
+    {% block header %}
+    <header class="header">
+    {{ include('CpyreeAdminLTEBundle:Layout:header.html.twig')}}
+    </header>
+    {% endblock %}
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <!-- Left side column. contains the logo and sidebar -->
+        {% block left_side %}
+        {{ include('CpyreeAdminLTEBundle:Layout:left_sidebar.html.twig')}}
+        {% endblock %}
+        <!-- Right side column. Contains the navbar and content of the page -->
+        <aside class="right-side {% if rigthContentClass is defined %}{{ rigthContentClass }}{% endif %}">
+            <!-- Content Header (Page header) -->
+
+            {% block content_header %}
+                <section class="content-header"></section>
+            {% endblock %}
+
+            <!-- Main content -->
+            <section class="content">
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success alert-dismissable">
+                {{ flashMessage }}
+                </div>
+                {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div class="alert alert-danger alert-dismissable">
+                {{ flashMessage }}
+                </div>
+                {% endfor %}
+
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-warning alert-dismissable">
+                {{ flashMessage }}
+                </div>
+            {% endfor %}
+            {% block content %}
+            {% endblock %}
+            </section>
+        </aside><!-- /.right-side -->
+    </div>
+
+{% block javascripts %}
+    <!-- Morris.js charts -->
+    {% javascripts output="js/compiled.js"
+    "assets_deps/raphael/raphael-min.js"
+    "assets_deps/jqueryui/jquery-ui.min.js"
+    "assets_deps/bootstrap/dist/js/bootstrap.min.js"
+    "@CpyreeAdminLTEBundle/Resources/public/js/AdminLTE/app.js"
+    "@CpyreeAdminLTEBundle/Resources/public/js/AdminLTE/demo.js"
+    %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+
+    {% endjavascripts %}
+
+{% endblock %}
+</body>
+</html>

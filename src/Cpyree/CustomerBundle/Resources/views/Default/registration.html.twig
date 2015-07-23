@@ -1,0 +1,205 @@
+{% extends "CpyreeAdminLTEBundle::base.html.twig" %}
+{% block content %}
+    <div class="row">
+
+    <!-- left column -->
+    <div class="col-md-6">
+        <!-- general form elements -->
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Customer Registration</h3>
+            </div><!-- /.box-header -->
+            <!-- form start -->
+            {{ form_start(simpleRegistrationForm, {'action':path('cpyree_customer_default_create')}) }}
+                <div class="box-body">
+                    <div class="form-group">
+                        {{ form_label(simpleRegistrationForm.username) }}
+                        {{ form_errors(simpleRegistrationForm.username) }}
+                        {{ form_widget(simpleRegistrationForm.username, {'attr':{'class':'form-control','placeholder':'Your login'  }} ) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(simpleRegistrationForm.password.password) }}
+                        {{ form_errors(simpleRegistrationForm.password.password) }}
+                        {{ form_widget(simpleRegistrationForm.password.password, {'attr':{'class':'form-control','placeholder':'Your passowrd' }}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(simpleRegistrationForm.password.confirm) }}
+                        {{ form_errors(simpleRegistrationForm.password.confirm) }}
+                        {{ form_widget(simpleRegistrationForm.password.confirm, {'attr':{'class':'form-control','placeholder':'retype Your passowrd' }}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(simpleRegistrationForm.email) }}
+                        {{ form_errors(simpleRegistrationForm.email) }}
+                        {{ form_widget(simpleRegistrationForm.email, {'attr':{'class':'form-control','placeholder':'Your email'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(simpleRegistrationForm.bornDate) }}
+                        {{ form_errors(simpleRegistrationForm.bornDate) }}
+                        {{ form_widget(simpleRegistrationForm.bornDate, {'attr':{'class':'form-control'}}) }}
+                    </div>
+                </div><!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            {{ form_end(simpleRegistrationForm) }}
+
+        </div><!-- /.box -->
+        <!-- general form elements -->
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Bordered Table</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Login</th>
+                        <th>Email</th>
+                    </tr>
+                    {% for customer in customers %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ customer.username }}</td>
+                        <td>{{ customer.email }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+
+
+    </div><!--/.col (left) -->
+    <!-- right column -->
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Bordered Table</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Task</th>
+                        <th>Progress</th>
+                        <th style="width: 40px">Label</th>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>Update software</td>
+                        <td>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-red">55%</span></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>Clean database</td>
+                        <td>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-yellow">70%</span></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>Cron job running</td>
+                        <td>
+                            <div class="progress xs progress-striped active">
+                                <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-light-blue">30%</span></td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>Fix and squish bugs</td>
+                        <td>
+                            <div class="progress xs progress-striped active">
+                                <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-green">90%</span></td>
+                    </tr>
+                </table>
+            </div><!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+            </div>
+        </div><!-- /.box -->
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Condensed Full Width Table</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body no-padding">
+                <table class="table table-condensed">
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Task</th>
+                        <th>Progress</th>
+                        <th style="width: 40px">Label</th>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>Update software</td>
+                        <td>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-red">55%</span></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>Clean database</td>
+                        <td>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-yellow">70%</span></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>Cron job running</td>
+                        <td>
+                            <div class="progress xs progress-striped active">
+                                <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-light-blue">30%</span></td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>Fix and squish bugs</td>
+                        <td>
+                            <div class="progress xs progress-striped active">
+                                <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-green">90%</span></td>
+                    </tr>
+                </table>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div><!-- /.col -->
+    </div>   <!-- /.row -->
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+{% javascripts
+"@CpyreeAdminLTEBundle/Resources/public/js/plugins/iCheck/icheck.min.js"
+%}
+<script src="{{ asset_url }}" type="text/javascript"></script>
+{% endjavascripts %}
+{% endblock %}

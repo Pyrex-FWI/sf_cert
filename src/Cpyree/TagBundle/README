@@ -1,0 +1,111 @@
+php bin/export.php --config=src/Cpyree/TagBundle/Workbench/export_conf.json src/Cpyree/TagBundle/Workbench/TagBundle.mwb
+
+php app/console doctrine:mapping:import CpyreeTagBundle --force annotation               
+php app/console doctrine:generate:entities CpyreeTagBundle   
+
+php app/console doctrine:generate:entities CpyreeTagBundle 
+
+ php app/console tag:update:mediafile file dbs /DBS/Kompas\ -\ Zouk\ -\ Kizomba/Zouk/ --file=./app/cache/mediafiel_dbs.txt
+
+
+
+######MIGRATION####
+
+SET foreign_key_checks = 0;
+truncate media_file; truncate tag_data;
+SET foreign_key_checks = 1;
+
+INSERT INTO audio.audio_file (id,hash,filepath,created,updated) 
+SELECT id,FullPathMd5,FullPath,created,modified FROM audio.nasfiles;
+
+php app/console tag file /DBS/
+
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+CREATE TABLE IF NOT EXISTS `audio`.`tag_data` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `media_file_id` INT(10) UNSIGNED NOT NULL,
+  `title` VARCHAR(255) NULL DEFAULT NULL,
+  `artist` VARCHAR(255) NULL DEFAULT NULL,
+  `genre` VARCHAR(45) NULL DEFAULT NULL,
+  `year` VARCHAR(4) NULL DEFAULT NULL,
+  `album` VARCHAR(255) NULL DEFAULT NULL,
+  `bpm` DECIMAL(5,2) NULL DEFAULT NULL,
+  `initial_key` VARCHAR(10) NULL DEFAULT NULL,
+  `comment` TEXT NULL DEFAULT NULL,
+  `cover_id` INT(11) NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `updated` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `FK_tag_data` (`media_file_id` ASC),
+  UNIQUE INDEX `media_file_id_UNIQUE` (`media_file_id` ASC),
+  INDEX `FK_cover_idx` (`cover_id` ASC),
+  CONSTRAINT `FK_tag_data`
+    FOREIGN KEY (`media_file_id`)
+    REFERENCES `audio`.`media_file` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `FK_cover`
+    FOREIGN KEY (`cover_id`)
+    REFERENCES `audio`.`cover` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `audio`.`media_file` (
+  `id` INT(10) NOT NULL,
+  `hash` VARCHAR(32) NULL DEFAULT NULL,
+  `filepath` TEXT NULL DEFAULT NULL,
+  `tag_pass` TINYINT(4) NULL DEFAULT 0,
+  `created` DATETIME NULL DEFAULT NULL,
+  `updated` DATETIME NULL DEFAULT NULL,
+  `exist` TINYINT(4) NULL DEFAULT 1,
+  `context_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `hash_UNIQUE` (`hash` ASC),
+  INDEX `context_idx` (`context_id` ASC),
+  CONSTRAINT `fk_context`
+    FOREIGN KEY (`context_id`)
+    REFERENCES `audio`.`context` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `audio`.`context` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `audio`.`cover` (
+  `id` INT(11) NOT NULL,
+  `mime` VARCHAR(45) NULL DEFAULT NULL,
+  `filepath` TEXT NULL DEFAULT NULL,
+  `created` DATETIME NULL DEFAULT NULL,
+  `updated` DATETIME NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE IF NOT EXISTS `audio`.`album` (
+  `id` INT(11) NOT NULL,
+  `name` VARCHAR(100) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -1,0 +1,60 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Artiste</th>
+      <th>Titre</th>
+      <th>Année</th>
+      <th>Genre</th>
+      <th>Bpm</th>
+      <th>Key</th>
+      <th>Ajouté le</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in tagData_list %}
+    <tr>
+      <td>{{ row.id }}</td>
+      <td>{{ row.tagData.artist|default('') }}</td>
+      <td>{{ row.tagData.title|default('') }}</td>
+      <td>{{ row.tagData.year|default('') }}</td>
+      <td>{{ row.tagData.genre|default('') }}</td>
+      <td>{{ row.tagData.bpm|default('') }}</td>
+      <td>{{ row.tagData.initialKey|default('') }}</td>
+      <td>{{ row.created|date("d/m/Y")|default('') }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if tagData_list|length > 1%}
+    <ul class="pagination">
+        {% if pagination.page == 1%}
+            <li><a class="disabled" href="#">&lsaquo;</a></li>
+        {% else %}
+            <li><a href="{{ path(pagination.route, pagination.route_params| merge( {'page': 1} )) }}">&laquo;</a></li>            
+        {% endif %}
+        {% if pagination.page > 1 %}
+            <li><a href="{{ path(pagination.route, pagination.route_params| merge( {'page': pagination.page - 1} )) }}">&lsaquo;</a></li>
+        {% endif %}
+        
+        {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
+            {% if p == pagination.page %}
+                <li class="active">
+                    <a href="#">{{ p }}<span class="sr-only">(current)</span></a>
+                </li>
+            {% else %}
+                <li class="">
+                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if pagination.page<pagination.pages_count %}
+        <li><a href="{{ path(pagination.route, 
+            pagination.route_params|merge({'page': pagination.page+1})) }}">&rsaquo;</a></li>
+        <li><a href="{{ path(pagination.route,  
+            pagination.route_params|merge({'page': pagination.pages_count})) }}">&raquo;</a></li>
+        {% endif %}
+    </ul>
+{% endif %}

@@ -1,0 +1,15 @@
+cpyree_auth_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CpyreeAuthBundle:Default:index }
+_auth_login:
+    path:     /login
+    defaults: { _controller: CpyreeAuthBundle:Default:login }
+_auth_security_check:
+    path:     /login_check
+_auth_logout:
+    path:     /logout
+
+cpyree_auth_account:
+    resource: "@CpyreeAuthBundle/Controller/AccountController.php"
+    type:     annotation
+    prefix:   /

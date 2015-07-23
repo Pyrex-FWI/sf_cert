@@ -1,0 +1,14 @@
+{% extends "CpyreeSaparManagerBundle::base.html.twig" %}
+{% block content %}
+    {{ form_start(pathForm) }}
+    <input type="submit" value="Send"/>
+    <div ng-app="saparManagerApp">
+        <div ng-view></div>
+    </div>
+    <!--<input type="submit" value="Send"/>-->
+    {#}{ form_end(pathForm) }#}
+    </form>
+    <script>
+
+    </script>
+{% endblock %}

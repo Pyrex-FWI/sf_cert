@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <services>
+        <!--service id="cpyree_admin_lte.type.range" class="Cpyree\AdminLTEBundle\Resources\Form\Type\RangeType">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+        </service>-->
+        <service id="cpyree_admin_lte.type.range" class="Cpyree\AdminLTEBundle\Form\Type\RangeType">
+            <tag name="form.type" alias="range" />
+        </service>
+        <service id="cpyree_admin_lte.type.date_range" class="Cpyree\AdminLTEBundle\Form\Type\DateRangeType">
+            <tag name="form.type" alias="date_range" />
+        </service>
+    </services>
+</container>

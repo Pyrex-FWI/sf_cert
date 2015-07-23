@@ -1,0 +1,3 @@
+acme_hello_anno:
+    path:     /helloanno/{name}
+    defaults: { _controller: AcmeHelloBundle:DefaultAnno:index }

@@ -9,5 +9,5 @@
 /composer.phar
 /vendor/
 /web/bundles/
-/src/*
-!src/AppBundle/
+.idea/
+src/Cpyree/DigitalDjPoolBundle/Resources/public/images/covers

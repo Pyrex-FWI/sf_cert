@@ -1,0 +1,81 @@
+{% extends "::admin_lte_layout.html.twig" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Digital Dj Pool Tracks</span>
+                <span class="info-box-number">{{ allCount }}</span>
+                <a href="{{ path('cpyree_digital_dj_pool_track') }}"  title="{{ 'View Digital Dj Pool Tracks'|trans }}"class="small-box-footer">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div><!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Was checked</span>
+                <span class="info-box-number">{{ approbationAverage }}<small>%</small></span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div><!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <div class="clearfix visible-sm-block"></div>
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Genres</span>
+                <span class="info-box-number">{{ allGenreCount }}</span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div><!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+            <div class="info-box-content">
+                <span class="info-box-text">Approved</span>
+                <span class="info-box-number">{{ positiveApp }}</span>
+            </div><!-- /.info-box-content -->
+        </div><!-- /.info-box -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+<div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Neutral</span>
+                    <span class="info-box-number">{{ neutralApp }}</span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div><!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Not yet approved</span>
+                    <span class="info-box-number">{{ unApp }}</span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div><!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Disapproved</span>
+                    <span class="info-box-number">{{ negativeApp }}</span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+{% endblock %}

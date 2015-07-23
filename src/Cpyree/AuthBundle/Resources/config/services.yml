@@ -1,0 +1,4 @@
+services:
+#    cpyree_auth.example:
+#        class: Cpyree\AuthBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

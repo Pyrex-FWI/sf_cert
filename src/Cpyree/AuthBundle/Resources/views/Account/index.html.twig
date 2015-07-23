@@ -1,0 +1,31 @@
+{% extends "CpyreeAuthBundle:Account:base.html.twig"  %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-solid">
+            <div class="box-header">
+                <i class="fa fa-text-width"></i>
+                <h3 class="box-title">My account</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <dl class="dl-horizontal">
+                    <dt>Login</dt>
+                    <dd>{{ app.user.username }}</dd>
+                    {{ userClass  }}
+                    {%  if userClass in 'Symfony\Component\Security\Core\User\User'  %}
+                    <dt>Email</dt>
+                    <dd>{#{ app.user.email }#}</dd>
+                    <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                    <dt>Malesuada porta</dt>
+                    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                    <dt>Felis euismod semper eget lacinia</dt>
+                    <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
+                    {% endif %}
+                </dl>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div><!-- ./col -->
+</div><!-- /.row -->
+   {{ dump(userClass) }}
+   {{ dump(app.user) }}
+{% endblock %}

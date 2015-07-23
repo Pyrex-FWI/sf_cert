@@ -1,0 +1,9 @@
+parameters:
+    cpyree_sapar_maanger_class: Cpyree\SaparManagerBundle\Service\ManagerService
+services:
+    cpyree_sapar_manager:
+        class: %cpyree_sapar_maanger_class%
+        arguments: [@service_container]
+        calls:
+            - [setTempDir, [%sapar_manager.watch_dir%] ]
+            - [setConfFile, [%sapar_manager.config_file%] ]

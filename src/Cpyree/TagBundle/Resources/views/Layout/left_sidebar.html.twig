@@ -1,0 +1,32 @@
+<aside class="left-side sidebar-offcanvas">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="active">
+                <a href="index.html">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('dbs_list') }}">
+                    <i class="fa fa-th"></i> <span>Files</span> <small class="badge pull-right bg-green">new</small>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('artist_list') }}">
+                    <i class="fa fa-th"></i> <span>Artists</span> <small class="badge pull-right bg-green">new</small>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>Forms</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ path('dbs_tag_data_form') }}"><i class="fa fa-angle-double-right"></i> Tag Data form</a></li>
+                    <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
+                    <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+</aside>

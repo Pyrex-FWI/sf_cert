@@ -1,0 +1,23 @@
+<aside class="left-side sidebar-offcanvas">
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="active">
+                <a href="{{ path('cpyree_digital_dj_pool_home') }}">
+                    <i class="fa fa-dashboard"></i> <span>{{ 'dashboard'|trans|capitalize }}</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('cpyree_digital_dj_pool_track') }}">
+                    <i class="fa fa-th"></i> <span>{{ 'file'|transchoice(2)|capitalize }}</span>
+                </a>
+            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <a href="{{ path('cpyree_digital_dj_pool_approve_view') }}">
+                    <i class="fa fa-th"></i> <span>{{ 'approval'|trans|capitalize }}</span> <small class="badge pull-right bg-green">new</small>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </section>
+</aside>

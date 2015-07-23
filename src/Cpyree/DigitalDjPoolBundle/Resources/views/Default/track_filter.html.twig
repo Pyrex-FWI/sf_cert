@@ -1,0 +1,16 @@
+<div class="bs-example bs-example-tabs" role="tabpanel">
+    <ul id="" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class=""><a href="#simple" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">Simple</a></li>
+        <li role="presentation" class="active"><a href="#expert" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true">Expert</a></li>
+    </ul>
+    <div id="" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade" id="simple" aria-labelledby="simple-tab">
+            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+        </div>
+        <div role="tabpanel" class="tab-pane fade active in" id="expert" aria-labelledby="expert-tab">
+            {% if expertSearchForm %}
+                {{ form(expertSearchForm) }}
+            {% endif %}
+        </div>
+    </div>
+</div>

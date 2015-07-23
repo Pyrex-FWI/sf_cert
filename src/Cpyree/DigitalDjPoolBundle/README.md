@@ -1,0 +1,2 @@
+php app/console doctrine:mapping:convert  --force --from-database -vvv yml src/Cpyree/DigitalDjPoolBundle/Resources/config/doctrine/metada/orm
+php app/console doctrine:mapping:import CpyreeDigitalDjPoolBundle annotation

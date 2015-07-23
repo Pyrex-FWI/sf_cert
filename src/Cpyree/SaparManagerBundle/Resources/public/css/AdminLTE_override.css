@@ -1,0 +1,8 @@
+/*
+Css override
+*/
+.content{padding:0px;}
+.song-list{ /*max-height: 300px; background-color: #0000BB; overflow-y: scroll;*/}
+input.filter{width: 100%;}
+.left-pane{border-right: solid #74736d;min-height: 100%;padding-right: 0px;}
+.right-side{ height: 100vh;}

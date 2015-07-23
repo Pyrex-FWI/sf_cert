@@ -1,0 +1,151 @@
+{% extends "CpyreeAuthBundle:Account:base.html.twig"  %}
+{% form_theme groupForm _self %}
+{% block form_row %}
+    <div claas="form-group">
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+{% endblock form_row %}
+{% form_theme userForm 'CpyreeAdminLTEBundle:Form:fields.html.twig' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success alert-dismissable">
+            <i class="fa fa-check"></i>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-warning alert-dismissable">
+            <i class="fa fa-check"></i>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    </div>
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Groups</h3>
+            </div><!-- /.box-header -->
+            {% if groups %}
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th style="width: 40px">Role</th>
+                        <th style="width: 40px">Created</th>
+                        <th style="width: 40px"></th>
+                    </tr>
+                    {%  for group in groups %}
+                    <tr>
+                        <td>{{ group.id }}</td>
+                        <td>{{ group.role }}</td>
+                        <td>
+                            {{ group.created|date("m/d/Y H:i:s") }}
+                        </td>
+                        <td>
+
+                            {% if app.user.id is defined and app.user.id != user.id %}<a class="btn btn-danger btn-sm">Delete</a>{% endif %}
+                            <a class="btn btn-info btn-sm">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="{{ path('cpyree_auth_remove_group', {'id':group.id }) }}">Remove</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div><!-- /.box-body -->
+            {% else %}
+            <div class="box-body">
+                <div class="callout callout-info">
+                    <h4>Info!</h4>
+                    <p>They are no groups in database..</p>
+                </div>
+            </div>
+            {% endif %}
+            <div class="box-footer clearfix">
+                <a class="btn btn-success btn-sm pull-right">Create group</a>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box-header">
+                        <h3 class="box-title">Add Group</h3>
+                    </div>
+                    <div class="box-footer clearfix">
+                        {{ form_start(groupForm) }}
+                        <div class="box-body">
+                            {{ form_row(groupForm.name) }}
+                            {#{ form_row(groupForm.role) }#}
+                        </div>
+                        <div class="box-footer">
+                            <input type="submit" class="btn btn-primary" value="Ajouter"/>
+                        </div>
+                        {{ form_end(groupForm) }}
+                        {#{ form(groupForm) }#}
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.box -->
+    </div>
+    <div class="col-md-6">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Registered Users</h3>
+            </div><!-- /.box-header -->
+            {% if users %}
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th style="width: 40px">Username</th>
+                        <th style="width: 40px">Email</th>
+                        <th style="width: 40px">tocken</th>
+                        <th style="width: 40px">Last Login</th>
+                        <th style="width: 40px"></th>
+                    </tr>
+                    {%  for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {{ user.activationToken }}
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            {% if app.user.id is defined and app.user.id != user.id %}<a class="btn btn-danger btn-sm">Delete</a>{% endif %}
+                            <a class="btn btn-info btn-sm">Edit</a>
+                            <a class="btn btn-danger btn-sm" href="{{ path('cpyree_auth_remove_user', {'id':user.id}) }}">remove</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div><!-- /.box-body -->
+            {% endif %}
+            {% if groups|length > 0 %}
+            <div class="box-footer clearfix">
+                <a class="btn btn-success btn-sm">Create account</a>
+            </div>
+            <div class="box-footer clearfix">
+                {{ form(userForm, {'action':path('cpyree_auth_users')}) }}
+            </div>
+
+            {% else %}
+            <div class="box-body">
+                <div class="callout callout-info">
+                    <h4>Info!</h4>
+                    <p>They are no users in database..</p>
+                </div>
+            </div>
+            {% endif %}
+        </div><!-- /.box -->
+    </div>
+</div>
+    {{ dump(groups) }}
+    {{ dump(users) }}
+    {{ dump(app.user) }}
+{% endblock %}

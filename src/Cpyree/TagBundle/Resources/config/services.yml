@@ -1,0 +1,10 @@
+parameters:
+    cpyree_tag.id3.class: Cpyree\TagBundle\Lib\Id3
+    cpyree_tag_bundle_manager.class: Cpyree\TagBundle\Manager\TagBundleManager
+
+services:
+    cpyree_tag.id3:
+        class: %cpyree_tag.id3.class%
+    cpyree_tag_bundle_manager:
+        class:     "%cpyree_tag_bundle_manager.class%"
+        arguments: ["@doctrine.orm.default_entity_manager"]

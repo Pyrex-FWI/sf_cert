@@ -1,0 +1,21 @@
+{% extends 'CpyreeTagBundle::admin_lte_layout.html.twig' %}
+{% block action_content %}
+{{ parent() }}
+<h3>Artist</h3>
+<div class="artist">
+    {{ form(form) }}
+</div>
+<ul class="pagination">
+    <li><a href="{{ path('artist_edit', {'id':app.request.attributes.get('id')-1}) }}">&laquo;</a></li>            
+    <li><a href="{{ path('artist_edit', {'id':app.request.attributes.get('id')+1}) }}">&raquo;</a></li>
+</ul>
+<div>
+    {% for song in artist.tagDatas %}
+    {#% for song in songs %#}
+    <p>{{song.title}} - {{song.album}} - {{song.year}}</p>
+    {% endfor %}
+</div>
+
+<pre>{{artist.tagDatas|length}}</pre>
+
+{% endblock %}

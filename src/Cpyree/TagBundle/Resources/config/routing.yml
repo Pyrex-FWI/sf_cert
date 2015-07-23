@@ -1,0 +1,22 @@
+cpyree_home:
+    pattern:  /
+    defaults: { _controller: CpyreeTagBundle:Dbs:dbs_home }
+dbs_home:
+    resource: "@CpyreeTagBundle/Controller/DbsController.php"
+#    prefix:   /
+    type:     annotation
+artist_home:
+    resource: "@CpyreeTagBundle/Controller/ArtistController.php"
+#    prefix:   /
+    type:     annotation
+genre_home:
+    resource: "@CpyreeTagBundle/Controller/GenreController.php"
+#    prefix:   /
+    type:     annotation
+sapar_home:
+    resource: "@CpyreeTagBundle/Controller/SaparController.php"
+#    prefix:   /
+    type:     annotation
+user:
+    resource: "@CpyreeTagBundle/Controller/UserController.php"
+    type:   annotation

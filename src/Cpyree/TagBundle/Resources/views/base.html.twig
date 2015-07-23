@@ -1,0 +1,12 @@
+{% extends "CpyreeAdminLTEBundle::base.html.twig" %}
+{% block left_side %}
+    {{ include('CpyreeTagBundle:Layout:left_sidebar.html.twig')}}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+    '@CpyreeDigitalDjPoolBundle/Resources/public/js/*'
+    %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+{% endblock %}

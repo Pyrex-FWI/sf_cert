@@ -1,0 +1,15 @@
+{% extends "CpyreeDigitalDjPoolBundle::base.html.twig" %}
+{% set title = 'Digital Dj Pool' %}
+{% block stylesheets %}
+    {{parent()}}
+    <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block content %}
+    <!-- Main content -->
+    {% include "CpyreeDigitalDjPoolBundle:Default:track_filter.html.twig" %}
+    {{ query }}
+    <div class="table-responsive">
+        {% include "CpyreeDigitalDjPoolBundle:Default:track_table_simple.html.twig" %}
+    </div>
+{% endblock %}

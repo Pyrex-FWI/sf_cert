@@ -1,0 +1,97 @@
+{% extends 'form_div_layout.html.twig' %}
+{% block form %}
+    {{ form_start(form) }}
+    <div class="box-body">
+        {{ form_widget(form) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock form %}
+
+{% block form_start %}
+    {% set method = method|upper %}
+    {%- if method in ["GET", "POST"] -%}
+        {% set form_method = method %}
+    {%- else -%}
+        {% set form_method = "POST" %}
+    {%- endif -%}
+    <form role="form" name="{{ form.vars.name }}" method="{{ form_method|lower }}" action="{{ action }}"{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+    {%- if form_method != method -%}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {%- endif -%}
+{% endblock form_start %}
+{% block form_row %}
+    <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+{% endblock form_row %}
+{% block submit_widget %}
+    {% set type = type|default('submit') %}
+    {% set attr = {'class': 'btn btn-primary'} %}
+    {{ block('button_widget') }}
+{% endblock submit_widget %}
+{% block button_row %}
+    {{ form_widget(form) }}
+{% endblock button_row %}
+{% block range_widget -%}
+
+    <span id="{{ id }}_slider_view" type="text"  disabled="disabled"  class="form_control">
+        {{ curMin }} to {{ curMax }}{% if showDiff %} ({{ curMax - curMin}}){% endif %}
+    </span>
+    {{ block('hidden_widget') }}
+    <div id="{{ id }}_slider"></div>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $("#{{ id }}_slider").slider({
+                range: true,
+                min: {{ min }},
+                max: {{ max }} ,
+                values: [ {{ curMin }}, {{ curMax }} ],
+                slide: function( event, ui ) {
+                    {% if showDiff %}
+                    $( "#{{ id }}_slider_view" ).html(ui.values[ 0 ] + " to " + ui.values[ 1 ] + ' (' + (ui.values[ 1 ]-ui.values[ 0 ]) +')');
+                    {% else %}
+                    $( "#{{ id }}_slider_view" ).html(ui.values[ 0 ] + " to " + ui.values[ 1 ]);
+                    {% endif %}
+                    $( "#{{ id }}" ).val(ui.values[ 0 ] + ":" + ui.values[ 1 ] );
+                }
+            });
+        });
+    });
+    </script>
+{%- endblock %}
+
+{% block date_range_widget -%}
+    <div>
+    <span class="btn btn-default form-control-date-range" id="daterange-btn">
+        <i class="fa fa-calendar"></i> Date range picker
+        <i class="fa fa-caret-down"></i>
+    </span>
+    </div>
+    {% set type = type|default('hidden') %}
+    {{ block('form_widget_simple', {attr:attr|merge({'type': 'hidden' })} ) }}
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#daterange-btn').daterangepicker(
+                {
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
+                        'Last 7 Days': [moment().subtract('days', 6), moment()],
+                        'Last 30 Days': [moment().subtract('days', 29), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
+                    },
+                    startDate: moment().subtract('days', 29),
+                    endDate: moment()
+                },
+                function(start, end) {
+                    $('#{{ id }} ').val(start.format('DD-MM-YYYY-00-00-00') + ':' + end.format('DD-MM-YYYY-23-59-59'));
+                }
+        );
+
+    });
+    </script>
+{%- endblock %}

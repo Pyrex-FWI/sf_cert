@@ -1,0 +1,10 @@
+{% extends 'CpyreeTagBundle::admin_lte_layout.html.twig' %}
+{% block action_content %}
+{{ parent() }}
+<!-- Main content -->
+<section class="content">     
+          <div class="table-responsive">
+              {{ include('CpyreeTagBundle:Artist:table_audiofile_tagdata.html.twig', {'data': paginationElements, 'pagination': pagination} ) }}
+          </div>
+</section>>
+{% endblock %}

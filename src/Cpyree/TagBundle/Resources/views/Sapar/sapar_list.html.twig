@@ -1,0 +1,9 @@
+{% extends 'CpyreeTagBundle::layout.html.twig' %}
+{% block action_content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">          
+          
+          <div class="table-responsive">
+              {{ include('CpyreeTagBundle:Sapar:table_audiofile_tagdata.html.twig', {'data': tagData_list, 'pagination': pagination} ) }}
+          </div>
+</div>
+{% endblock %}

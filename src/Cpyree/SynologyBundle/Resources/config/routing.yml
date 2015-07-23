@@ -1,0 +1,3 @@
+cpyree_synology_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CpyreeSynologyBundle:Default:index }

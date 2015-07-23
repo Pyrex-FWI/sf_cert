@@ -1,0 +1,17 @@
+{% extends "CpyreeDigitalDjPoolBundle::basev2.html.twig" %}
+{% set pageTitle = 'Digital Dj Pool' %}
+{% block content %}
+    <!-- Main content -->
+    {% include "CpyreeDigitalDjPoolBundle:Default:track_filter.html.twig" %}
+    {{ query }}
+    <div class="table-responsive">
+        {% include "CpyreeDigitalDjPoolBundle:Default:track_table_extended.html.twig" %}
+    </div>
+{% endblock %}
+{% block additional_js %}
+    {{ parent() }}
+    <link href="{{ asset('assets_deps/jqueryui/themes/ui-lightness/jquery-ui.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets_deps/bootstrap-daterangepicker/daterangepicker-bs3.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('assets_deps/moment/min/moment.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('assets_deps/daterangepicker/lib/daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
+{% endblock %}

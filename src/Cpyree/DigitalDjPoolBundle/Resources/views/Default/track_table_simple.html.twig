@@ -1,0 +1,41 @@
+<div class="count" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    {{ pagination.getTotalItemCount }}
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        {# sorting of properties based on query components #}
+        <th{% if pagination.isSorted('t.uid') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Uid', 't.uid') }}</th>
+        <th{% if pagination.isSorted('t.trackId') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Track id', 't.trackId') }}</th>
+        <th{% if pagination.isSorted('t.fulltitle') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'fulltitle', 't.fulltitle') }}</th>
+        <th{% if pagination.isSorted('t.crdate') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'crdate', 't.crdate') }}</th>
+        <th{% if pagination.isSorted('t.releaseDate') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'releaseDate', 't.releaseDate') }}</th>
+        <th{% if pagination.isSorted('t.score') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'score', 't.score') }}</th>
+        <th{% if pagination.isSorted('t.approval') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'approval', 't.approval') }}</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    {# table body #}
+    {% for track in pagination %}
+        <tr {% if loop.index is odd %}class="color"{% endif %} id="track_row_{{ track.uid }}">
+            <td>
+                {{ track.getUid() }}
+            </td>
+            <td>{{ track.trackId }}</td>
+            <td>{{ track.fulltitle }}</td>
+            <td>{{ track.crdate|date("d/m/Y") }}</td>
+            <td>{{ track.releaseDate|date("d/m/Y") }}</td>
+            <td>{{ track.score }}  </td>
+            <td>{{ track.approval }}  </td>
+            <td> {{ track|player(track.uid) }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+        {# display navigation #}
+
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>

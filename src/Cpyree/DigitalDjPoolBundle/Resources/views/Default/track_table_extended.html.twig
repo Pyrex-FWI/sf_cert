@@ -1,0 +1,81 @@
+{{ form_start(globalActionsForm) }}
+<input type="hidden" name="form[action]" value=""/>
+<div class="count" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    {{ pagination.getTotalItemCount }}
+</div>
+{%  include "CpyreeDigitalDjPoolBundle:Default:track_global_action_submit_row.html.twig"  with { 'form': globalActionsForm  } only %}
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th{% if pagination.isSorted('t.uid') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Uid', 't.uid') }}</th>
+        <th{% if pagination.isSorted('t.trackId') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Track id', 't.trackId') }}</th>
+        <th{% if pagination.isSorted('t.fulltitle') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'fulltitle', 't.fulltitle') }}</th>
+        <th{% if pagination.isSorted('t.crdate') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'crdate', 't.crdate') }}</th>
+        <th{% if pagination.isSorted('t.releaseDate') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'releaseDate', 't.releaseDate') }}</th>
+        <th{% if pagination.isSorted('t.score') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'score', 't.score') }}</th>
+        <th{% if pagination.isSorted('t.approval') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'approval', 't.approval') }}</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
+    {# table body #}
+    {% for track in pagination %}
+        <tr class="track_row {% if loop.index is odd %}color{% endif %}" id="track_row_{{ track.uid }}">
+            <td>
+                <input type="checkbox" name="{{ globalActionsForm.vars.name }}[tracks][]" value="{{ track.uid }}" />
+                <img src="{{ asset(track|cover) }}" />
+            </td>
+            <td>{{ track.trackId }}</td>
+            <td>{{ track.fulltitle }}</td>
+            <td>{{ track.crdate|date("d/m/Y") }}</td>
+            <td>{{ track.releaseDate|date("d/m/Y") }}</td>
+            <td>{{ track.score }}  </td>
+            <td>{{ track.approval }}  </td>
+            <td>
+                <a class="track_action" href="{{ path('cpyree_digital_dj_pool_approve', {'track_uid': track.uid}) }}">A</a>
+                &nbsp;
+                <a class="track_action" href="{{ path('cpyree_digital_dj_pool_neutralapprove', {'track_uid': track.uid}) }}">N</a>
+                &nbsp;
+                <a class="track_action" href="{{ path('cpyree_digital_dj_pool_disapprove', {'track_uid': track.uid}) }}">D</a>
+                &nbsp;
+                <a class="" href="{{ path('cpyree_digital_dj_pool_download', {'id': track.uid}) }}">DL</a>
+            </td>
+            <td> {{ track|player(track.uid) }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{%  include "CpyreeDigitalDjPoolBundle:Default:track_global_action_submit_row.html.twig"  with { 'form': globalActionsForm  } only %}
+
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+</form>
+<script type="text/javascript"> 
+    $(document).ready(function() {
+        $('tr.track_row').click(function(event) {
+            if (event.target.type !== 'checkbox' && event.target.nodeName != 'AUDIO') {
+                //$(':checkbox', this).trigger('click');
+                $(':checkbox', this).iCheck('toggle');
+            }
+        });
+        $('a.track_action').click(function(e){
+
+            link = this;
+            $.ajax({
+                url: this.href,
+                dataType: 'json',
+                success : function(resultat, statut){
+                    if(resultat.success === true){
+                        $(link).parent().parent().remove();
+                    }
+                }
+            });
+            return false;
+        });
+
+    });
+
+</script>

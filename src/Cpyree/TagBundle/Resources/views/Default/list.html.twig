@@ -1,0 +1,27 @@
+{% extends "TwigBundle::layout.html.twig" %}
+
+{% block body %}
+    {# total items count #}
+<div class="count">
+    {{ pagination.getTotalItemCount }}
+</div>
+<table>
+<tr>
+{# sorting of properties based on query components #}
+    <th>{{ knp_pagination_sortable(pagination, 'Id', 'td.id') }}</th>
+    <th{% if pagination.isSorted('td.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Title', 'td.title') }}</th>
+</tr>
+
+{# table body #}
+{% for tagData in pagination %}
+<tr {% if loop.index is odd %}class="color"{% endif %}>
+    <td>{{ tagData.id }}</td>
+    <td>{{ tagData.title }}</td>
+</tr>
+{% endfor %}
+</table>
+{# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+{% endblock %}

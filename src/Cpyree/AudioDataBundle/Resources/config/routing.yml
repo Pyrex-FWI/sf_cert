@@ -1,0 +1,3 @@
+cpyree_audio_data_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CpyreeAudioDataBundle:Default:index }

@@ -1,0 +1,235 @@
+Track:
+    type: entity
+    table: tx_digitaldjpool_domain_model_track
+    indexes:
+        parent:
+            columns:
+                - pid
+        t3ver_oid:
+            columns:
+                - t3ver_oid
+                - t3ver_wsid
+        language:
+            columns:
+                - l10n_parent
+                - sys_language_uid
+    id:
+        uid:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        pid:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+        trackId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: track_id
+        fulltitle:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+            default: ''
+        downloaded:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+        rawData:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+            column: raw_data
+        tstamp:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            default: '0'
+        crdate:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            default: '0'
+        cruserId:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            default: '0'
+            column: cruser_id
+        deleted:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+        hidden:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+        starttime:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            default: '0'
+        endtime:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            default: '0'
+        t3verOid:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: t3ver_oid
+        t3verId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: t3ver_id
+        track:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            default: '0'
+        score:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+        bpm:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+        releaseDate:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: release_date
+        t3verWsid:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: t3ver_wsid
+        relatedTracks:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+            column: related_tracks
+        t3verLabel:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+            default: ''
+            column: t3ver_label
+        t3verState:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+            column: t3ver_state
+        t3verStage:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: t3ver_stage
+        t3verCount:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: t3ver_count
+        t3verTstamp:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: t3ver_tstamp
+        t3verMoveId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: t3ver_move_id
+        sysLanguageUid:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: sys_language_uid
+        l10nParent:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+            column: l10n_parent
+        l10nDiffsource:
+            type: blob
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+            column: l10n_diffsource
+        relatedGenres:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+            column: related_genres
+        hardDelete:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+            column: hard_delete
+        hardDeleteDate:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            default: '0'
+            column: hard_delete_date
+    lifecycleCallbacks: {  }

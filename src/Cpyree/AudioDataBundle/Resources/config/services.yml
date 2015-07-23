@@ -1,0 +1,27 @@
+parameters:
+    cpyree_audio_data.music_info.class: Cpyree\AudioDataBundle\Services\MusicInfo
+    cpyree_audio_data.itunes_music_info.class: Cpyree\AudioDataBundle\Services\MusicInfo\ItunesMusicInfoProvider
+    cpyree_audio_data.spotify_music_info.class: Cpyree\AudioDataBundle\Services\MusicInfo\SpotifyMusicInfoProvider
+    cpyree_audio_data.deezer_music_info.class: Cpyree\AudioDataBundle\Services\MusicInfo\DeezerMusicInfoProvider
+    cpyree_audio_data.album_cover.class: Cpyree\AudioDataBundle\Services\AlbumCover
+
+services:
+    cpyree_audio_data.music_info:
+#        class: %cpyree_audio_data.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+        class: %cpyree_audio_data.music_info.class%
+        arguments: [@service_container]
+    cpyree_audio_data.itunes_music_info:
+#        class: %cpyree_audio_data.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+        class: %cpyree_audio_data.itunes_music_info.class%
+        arguments: [@service_container]
+    cpyree_audio_data.deezer_music_info:
+        class: %cpyree_audio_data.deezer_music_info.class%
+        arguments: [@service_container]
+    cpyree_audio_data.spotify_music_info:
+        class: %cpyree_audio_data.spotify_music_info.class%
+        arguments: [@service_container]
+    cpyree_audio_data.album_cover:
+        class: %cpyree_audio_data.album_cover.class%
+        arguments: [@service_container]

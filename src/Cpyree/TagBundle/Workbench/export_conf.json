@@ -1,0 +1,18 @@
+    {
+        "export": "doctrine2-annotation",
+        "zip": false,
+        "dir": "/vagrant/sfTools/src/Cpyree/TagBundle/Entity",
+        "params": {
+            "backupExistingFile": true,
+            "skipPluralNameChecking": false,
+            "enhanceManyToManyDetection": true,
+            "bundleNamespace": "Cpyree\\TagBundle",
+            "entityNamespace": "Entity",
+            "repositoryNamespace": "Cpyree\\TagBundle\\Entity",
+            "useAnnotationPrefix": "ORM\\",
+            "useAutomaticRepository": true,
+            "indentation": 4,
+            "filename": "%entity%.%extension%",
+            "quoteIdentifier": false
+        }
+    }

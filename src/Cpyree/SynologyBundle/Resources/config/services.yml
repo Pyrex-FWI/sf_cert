@@ -1,0 +1,11 @@
+parameters:
+    cpyree_synology_host: sapar.synology.me
+    cpyree_synology_protocol: http
+    cpyree_synology_login: admin
+    cpyree_synology_password: sapar11
+    cpyree_synology_session_class: Cpyree\SynologyBundle\
+
+services:
+    cpyree_synology.session:
+        class: Cpyree\SynologyBundle\Services\SynologySession
+        arguments: ["@logger", %synology.server.host%, %synology.server.login%, %synology.server.password%, %synology.server.scheme%, %synology.server.port%]
